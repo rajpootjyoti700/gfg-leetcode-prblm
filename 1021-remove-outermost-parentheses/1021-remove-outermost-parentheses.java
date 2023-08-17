@@ -3,12 +3,13 @@ class Solution {
         int count=0;
         String ans="";
         boolean flag=true;
-        for(int i=0;i<s.length();i++){
+        int n=s.length();
+        for(int i=0;i<n;i++){
             if(s.charAt(i)=='(')
                 count++;
             else if(s.charAt(i)==')')
                 count--;
-            if(count==1 && flag==true){
+            if(flag==true && count==1){
                 flag=false;
                 continue;
             }
@@ -16,8 +17,10 @@ class Solution {
                 flag=true;
                 continue;
             }
+    
             ans=ans+s.charAt(i);
+            
         }
-        return ans;
+            return ans;
     }
 }
