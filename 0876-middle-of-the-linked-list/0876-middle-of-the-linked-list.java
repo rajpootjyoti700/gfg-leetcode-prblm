@@ -11,7 +11,7 @@
 class Solution {
     public ListNode middleNode(ListNode head) {
         // normal method brute force approach
-        ListNode curr =head;
+      /*  ListNode curr =head;
         int count=0;
         while(curr!=null){
             curr=curr.next;
@@ -23,6 +23,14 @@ class Solution {
             temp=temp.next;
         }
         return temp;
-        
+        */
+        // tortoise algo
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null ){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
     }
 }
