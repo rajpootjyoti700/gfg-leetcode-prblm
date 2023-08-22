@@ -11,16 +11,17 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        // standard tortoise algo
+        // using hash map 
         if(head==null || head.next==null)
             return false;
-        ListNode slow=head;
-        ListNode fast=head;
-        while(fast.next!=null && fast.next.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast)
+        HashMap<ListNode,Boolean> mp=new HashMap<>();
+        while(head!=null){
+            if(mp.containsKey(head))
                 return true;
+            else{
+                mp.put(head,true);
+                head=head.next;
+                }
         }
         return false;
     }
