@@ -12,9 +12,9 @@ class Solution {
             return 1;
         long temp=pow(x,n/2);
         if(n%2==0){
-            return ((temp*temp)%mod);
+            return (temp*temp)%mod;
         }
         else
-              return ((x*temp*temp)%mod);
+              return (x*temp*temp)%mod;
     }
 }
