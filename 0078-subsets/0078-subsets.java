@@ -1,21 +1,22 @@
       class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<Integer> curr=new ArrayList<>();
-         List<List<Integer>> ans=new ArrayList<>();
-        backtrac(nums,0,curr,ans);
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> list=new ArrayList<>();
+        subset2(0,nums,list,ans);
         return ans;
     }
-        public void backtrac(int[] nums,int i,List<Integer>curr,List<List<Integer>>ans){
-            if(i==nums.length){
-                ans.add(new ArrayList<Integer>(curr));
-                return;
-            }
-            curr.add(nums[i]);
-            backtrac(nums,i+1,curr,ans);
-            curr.remove(curr.size()-1);
-            backtrac(nums,i+1,curr,ans);
+
+    private void subset2(int ind, int[] arr, ArrayList<Integer> list, List<List<Integer>> ans) {
+        ans.add(new ArrayList<>(list));
+        for(int i=ind;i<arr.length;i++){
+           // if(i!=ind && arr[i]==arr[i-1]) continue;
+            list.add(arr[i]);
+            subset2(i+1,arr,list,ans);
+            list.remove(list.size()-1);
         }
-        
+        }
+              
             }
         
     
