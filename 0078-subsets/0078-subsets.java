@@ -1,29 +1,28 @@
 class Solution {
-     List<List<Integer>> result;
+     List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> subsets(int[] nums) {
-       // List<List<Integer>> result;
-        result = new ArrayList();
-        if(nums==null || nums.length==0) return result;
-        
-        subsets(nums,new ArrayList<Integer>(), 0);
-        return result;
+         //List<List<Integer>> ans = new ArrayList<>();
+       // Set<List<Integer>> res = new HashSet<>();
+        List<Integer> ds = new ArrayList<>();
+        Arrays.sort(nums); // Sort the input array
+        fun(nums, 0, ds);
+
+       // for (List<Integer> subset : res) {
+           // ans.add(subset);
+       // }
+
+        return ans;
     }
-    
-    private void subsets(int[] nums, ArrayList<Integer> temp, int index) {
-        // base condition
-        if(index >= nums.length) {
-            result.add(new ArrayList<>(temp));
+
+    private void fun(int[] nums, int index, List<Integer> ds) {
+        if (index == nums.length) {
+            ans.add(new ArrayList<>(ds)); 
             return;
         }
-        
-        // main logic
-		// case 1 : we pick the element
-        temp.add(nums[index]);
-        subsets(nums, temp, index+1); // move ahead
-        temp.remove(temp.size()-1);
-        
-		// case 2 : we don't pick the element ( notice, we did not add the current element in our temporary list
-        subsets(nums, temp, index+1); // move ahead
+
+        ds.add(nums[index]);
+        fun(nums, index + 1, ds);
+        ds.remove(ds.size() - 1);
+        fun(nums, index + 1, ds);
     }
 }
-
