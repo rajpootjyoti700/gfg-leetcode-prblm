@@ -1,22 +1,29 @@
-      class Solution {
+class Solution {
+     List<List<Integer>> result;
     public List<List<Integer>> subsets(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> ans = new ArrayList<>();
-        ArrayList<Integer> list=new ArrayList<>();
-        subset2(0,nums,list,ans);
-        return ans;
-    }
-
-    private void subset2(int ind, int[] arr, ArrayList<Integer> list, List<List<Integer>> ans) {
-        ans.add(new ArrayList<>(list));
-        for(int i=ind;i<arr.length;i++){
-           // if(i!=ind && arr[i]==arr[i-1]) continue;
-            list.add(arr[i]);
-            subset2(i+1,arr,list,ans);
-            list.remove(list.size()-1);
-        }
-        }
-              
-            }
+       // List<List<Integer>> result;
+        result = new ArrayList();
+        if(nums==null || nums.length==0) return result;
         
+        subsets(nums,new ArrayList<Integer>(), 0);
+        return result;
+    }
     
+    private void subsets(int[] nums, ArrayList<Integer> temp, int index) {
+        // base condition
+        if(index >= nums.length) {
+            result.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        // main logic
+		// case 1 : we pick the element
+        temp.add(nums[index]);
+        subsets(nums, temp, index+1); // move ahead
+        temp.remove(temp.size()-1);
+        
+		// case 2 : we don't pick the element ( notice, we did not add the current element in our temporary list
+        subsets(nums, temp, index+1); // move ahead
+    }
+}
+
