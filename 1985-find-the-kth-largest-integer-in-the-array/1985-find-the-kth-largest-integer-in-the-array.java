@@ -9,6 +9,6 @@ class Solution {
             heap.poll();
     }
     
-    return heap.poll() +""; 
+    return heap.peek().toString(); 
     }
 }
