@@ -8,9 +8,9 @@ class Solution {
                 mp.put(nums[i],1);
             
         }
-        PriorityQueue<Integer> p=new PriorityQueue<>((a,b)->Integer.compare(mp.get(a),mp.get(b)));
+        PriorityQueue<Integer> p=new PriorityQueue<>((a,b)->(mp.get(a)-mp.get(b)));
         int[] arr=new int[k];
-        for(Integer i: mp.keySet()){
+        for(int i: mp.keySet()){
             p.add(i);
             if(p.size()>k)
                 p.poll();
