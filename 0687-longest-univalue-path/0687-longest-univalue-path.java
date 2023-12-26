@@ -14,27 +14,20 @@
  * }
  */
 class Solution {
-    int result=0;
-    public int longestUnivaluePath(TreeNode root) {
-        helper(root);
-        return result;
+    public int maxPathSum(TreeNode root) {
+        int[] maxval=new int[1];
+        maxval[0]=Integer.MIN_VALUE;
+        maxpath(root,maxval);
+        return maxval[0];
+        
     }
-    public int helper(TreeNode root){
-        if(root==null)
+    public int maxpath(TreeNode root,int[] maxval){
+        if(root==null){
             return 0;
-        int val=0;
-        int left=helper(root.left);
-        int right=helper(root.right);
-        if(root.left!=null && root.val==root.left.val){
-            val=Math.max(val,left+1);
         }
-        if(root.right!=null && root.val==root.right.val){
-            val=Math.max(val,right+1);
-        }
-        if(root.left!=null && root.right!=null && root.val==root.left.val && root.val==root.right.val){
-            result=Math.max(result,left+right+2);
-        }
-        result=Math.max(val,result);
-        return val;
+        int lh=Math.max(0,maxpath(root.left,maxval));
+        int rh=Math.max(0,maxpath(root.right,maxval));
+        maxval[0]=Math.max(maxval[0],lh+rh+root.val);
+        return root.val+Math.max(lh,rh);
     }
 }
