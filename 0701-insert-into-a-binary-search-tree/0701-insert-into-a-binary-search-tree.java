@@ -16,14 +16,34 @@
 class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
         // using recursive call
-        if(root==null)
-            return new TreeNode(val);
-        if(val<root.val){
-            root.left= insertIntoBST(root.left,val);
+       // if(root==null)
+       //     return new TreeNode(val);
+      //  if(val<root.val){
+       //     root.left= insertIntoBST(root.left,val);
+       // }
+       // if(val>root.val){
+       //     root.right= insertIntoBST(root.right,val);
+       // }
+       // return root;
+        /* INTERATIVE METHOD */
+        TreeNode node =new TreeNode(val);
+        TreeNode curr=root;
+        TreeNode parent=null;
+        while(curr!=null){
+            parent=curr;
+            if(val<curr.val)
+                curr=curr.left;
+            else
+                    curr=curr.right;
+                
         }
-        if(val>root.val){
-            root.right= insertIntoBST(root.right,val);
-        }
+        if(parent==null)
+            return node;
+        else if(val<parent.val)
+            parent.left=node;
+        else
+            parent.right=node;
         return root;
+        
     }
 }
