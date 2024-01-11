@@ -25,6 +25,8 @@ class Solution {
         if(set.contains(k-curr))
             return true;
         set.add(curr);
-     return  findTarget(root.left,k) || findTarget(root.right,k);
+     boolean b1=findTarget(root.left,k);
+     boolean b2=findTarget(root.right,k);
+        return b1|| b2;
     }
 }
