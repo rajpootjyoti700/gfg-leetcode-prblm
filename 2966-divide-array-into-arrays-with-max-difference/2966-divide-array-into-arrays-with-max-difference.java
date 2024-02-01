@@ -11,7 +11,7 @@ class Solution {
 
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < 3; j++) {
-                if (c < l - 1 && (c + 3) % 3 == 0 && nums[c + 2] - nums[c] > k) {
+                if ((c + 3) % 3 == 0 && nums[c + 2] - nums[c] > k) {
                     return new int[0][0];
                 }
                 result[i][j] = nums[c++];
