@@ -1,4 +1,5 @@
 class Solution {
+    boolean ans;
     public boolean dfs(int node,int newcol,int[] color,int[][] graph){
         color[node]=newcol;
         for(int it: graph[node]){
