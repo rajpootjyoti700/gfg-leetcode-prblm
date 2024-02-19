@@ -10,7 +10,7 @@ class Solution {
                 return true;
             else if(n%2==0)
                 n=n/2;
-            else
+            else 
                 return false;
         }
         return false;
