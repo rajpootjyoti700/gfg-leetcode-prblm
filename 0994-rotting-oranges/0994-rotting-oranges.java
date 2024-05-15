@@ -25,7 +25,7 @@ class Solution {
                 else{
                     vis[i][j]=0;
                 }
-                if(grid[i][j]==1)
+                if(grid[i][j]==0)
                     cntfre++;
                 
             }
@@ -52,7 +52,14 @@ class Solution {
             }
             
         }
-        if(count!=cntfre)
+        int count1=0;
+       for(int i=0;i<n;i++){
+           for(int j=0;j<m;j++){
+               if(vis[i][j]==0)
+                   count1++;
+           }
+       }
+        if(count1!=cntfre)
             return -1;
         else
             return tm;
