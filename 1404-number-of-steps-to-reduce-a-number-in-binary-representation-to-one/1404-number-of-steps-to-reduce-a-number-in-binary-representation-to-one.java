@@ -1,17 +1,38 @@
 class Solution {
-    public int numSteps(String s) {
-        int n=s.length();
-        int x=0;
-        int y=0;
-        for(int i=n-1;i>=1;i--){
-            if((s.charAt(i)-'0'+y)==1 ){
-                y=1;
-                x+=2;
-            }
-            else{
-                x+=1;
-            }
+      private void divide(StringBuilder s) {
+        s.deleteCharAt(s.length() - 1);
+    }
+
+    private void add(StringBuilder s) {
+        int i = s.length() - 1;
+
+        while (i >= 0 && s.charAt(i) != '0') {
+            s.setCharAt(i, '0');
+            i--;
         }
-        return x+y;
+
+        if (i < 0) {
+            s.insert(0, '1');
+        } else {
+            s.setCharAt(i, '1');
+        }
+    }
+
+    public int numSteps(String s) {
+        StringBuilder sb = new StringBuilder(s);
+
+        int count = 0;
+        while (sb.length() > 1) {
+
+            if (sb.charAt(sb.length() - 1) == '0') {
+                divide(sb);
+            } else {
+                add(sb);
+            }
+
+            count ++;
+        }
+
+        return count;
     }
 }
