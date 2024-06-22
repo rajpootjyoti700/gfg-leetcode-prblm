@@ -1,6 +1,7 @@
 class Solution {
 
     public int numberOfSubarrays(int[] nums, int k) {
+        
         return atmost(nums,k)-atmost(nums,k-1);
     
     }
@@ -16,11 +17,14 @@ class Solution {
                         while(nums[i]%2!=1)i++;
                             i++;
                     }
-                    }
+                  
+                  }
             j++;
             ans=ans+(j-i+1);
             }
         return ans;
+    
+              
         }
             
     }
