@@ -1,38 +1,66 @@
+class pair{
+    int first;
+    int second;
+    public pair(int first,int second){
+        this.first=first;
+        this.second=second;
+    }
+}
+
+class tuple{
+    int first;
+    int second;
+    int third;
+    public tuple(int first,int second,int third){
+        this.first=first;
+        this.second=second;
+        this.third=third;
+    }
+}
+
 class Solution {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-      Map<Integer, List<int[]>> adj = new HashMap<>();
-        for (int[] flight : flights) {
-            adj.computeIfAbsent(flight[0], key -> new ArrayList<>()).add(new int[] {flight[1], flight[2]});
+        // we will create the adj list which will contain the pair of node and distance 
+        // inside the list of list
+        ArrayList<ArrayList<pair>> adj=new ArrayList<>();
+        int m=flights.length;
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<>());
         }
-
-        int[] dist = new int[n];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[src] = 0;
-
-        Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[] {src, 0});
-        int stops = 0;
-
-        while (!q.isEmpty() && stops <= k) {
-            int sz = q.size();
-            while (sz-- > 0) {
-                int[] curr = q.poll();
-                int node = curr[0];
-                int distance = curr[1];
-
-                if (!adj.containsKey(node)) continue;
-
-                for (int[] next : adj.get(node)) {
-                    int neighbour = next[0];
-                    int price = next[1];
-                    if (price + distance >= dist[neighbour]) continue;
-                    dist[neighbour] = price + distance;
-                    q.offer(new int[] {neighbour, dist[neighbour]});
+        //list containing pair of node and distance .
+        for(int i=0;i<m;i++){
+            adj.get(flights[i][0]).add(new pair(flights[i][1],flights[i][2]));
+        }
+        // now taking a queue of tuple 
+        Queue<tuple> q=new LinkedList<>();
+        q.add(new tuple(0,src,0));
+        // create a distance array 
+        int[] dist=new int[n];
+        for(int i=0;i<n;i++){
+            dist[i]=(int)(1e9);
+        }
+        dist[src]=0;
+        while(!q.isEmpty()){
+            tuple it=q.peek();
+            q.remove();
+            int stop=it.first;
+            int node=it.second;
+            int cost=it.third;
+            if(stop>k)
+                continue;
+            
+            for(pair itr: adj.get(node)){
+                int adn=itr.first;
+                int adw=itr.second;
+                
+                if(adw+cost<dist[adn] && stop<=k){
+                    dist[adn]=adw+cost;
+                    q.add(new tuple(stop+1,adn,adw+cost));
                 }
             }
-            stops++;
+            
         }
-
-        return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];  
+        if(dist[dst] == (int)(1e9)) return -1; 
+        return dist[dst]; 
     }
 }
